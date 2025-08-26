@@ -9,3 +9,5 @@ export interface ISidebarItem {
     component: ComponentType;
   }[];
 }
+
+export type TRole = "SENDER" | "RECEIVER" | "ADMIN";

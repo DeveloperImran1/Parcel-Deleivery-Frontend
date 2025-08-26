@@ -5,23 +5,24 @@ import {
   IconListDetails,
 } from "@tabler/icons-react";
 
-export const adminSidebarItems = [
+export const receiverSidebarItems = [
   {
     title: "Analytics",
-    url: "/admin/analytics",
+    url: "/receiver/analytics",
     component: Analytics,
     icon: IconDashboard,
   },
 
   {
     title: "Lifecycle",
-    url: "/admin//lifesicle",
+    url: "/receiver/lifesicle",
     icon: IconListDetails,
     component: Analytics,
   },
+
   {
     title: "Projects",
-    url: "/admin/projects",
+    url: "/receiver/project",
     icon: IconFolder,
     component: Analytics,
   },
