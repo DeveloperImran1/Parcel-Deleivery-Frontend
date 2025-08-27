@@ -3,11 +3,13 @@ import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { role } from "@/constant/role";
 import Login from "@/pages/Authentication/Login";
 import Register from "@/pages/Authentication/Register";
+import Verify from "@/pages/Authentication/Verify";
 import About from "@/pages/Public/About";
 import Contact from "@/pages/Public/Contact";
 import Faq from "@/pages/Public/Faq";
 import Features from "@/pages/Public/Features";
 import HomePage from "@/pages/Public/HomePage";
+import UnAuthorized from "@/pages/Public/Unauthorized";
 import type { TRole } from "@/types/auth.type";
 import { generateRoutes } from "@/utils/generateRoutes";
 import withAuth from "@/utils/withAuth";
@@ -42,10 +44,14 @@ export const router = createBrowserRouter([
         Component: Features,
         path: "features",
       },
-      //   {
-      //     Component: withAuth(About),
-      //     path: "about",
-      //   },
+      {
+        Component: Verify,
+        path: "verify",
+      },
+      {
+        Component: withAuth(UnAuthorized),
+        path: "unauthorized",
+      },
     ],
   },
 
