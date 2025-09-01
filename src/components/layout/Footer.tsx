@@ -1,5 +1,6 @@
 import React from "react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 interface FooterProps {
   logo?: {
@@ -29,42 +30,58 @@ const defaultSections = [
   {
     title: "Product",
     links: [
-      { name: "Overview", href: "#" },
-      { name: "Pricing", href: "#" },
-      { name: "Marketplace", href: "#" },
-      { name: "Features", href: "#" },
+      { name: "Overview", href: "/" },
+      { name: "Pricing", href: "/faq" },
+      { name: "Marketplace", href: "/faq" },
+      { name: "Features", href: "/about" },
     ],
   },
   {
     title: "Company",
     links: [
-      { name: "About", href: "#" },
-      { name: "Team", href: "#" },
-      { name: "Blog", href: "#" },
-      { name: "Careers", href: "#" },
+      { name: "About", href: "/about" },
+      { name: "Team", href: "/faq" },
+      { name: "Blog", href: "/faq" },
+      { name: "Careers", href: "/features" },
     ],
   },
   {
     title: "Resources",
     links: [
-      { name: "Help", href: "#" },
-      { name: "Sales", href: "#" },
-      { name: "Advertise", href: "#" },
-      { name: "Privacy", href: "#" },
+      { name: "Help", href: "/contact" },
+      { name: "Sales", href: "/features" },
+      { name: "Advertise", href: "/features" },
+      { name: "Privacy", href: "/faq" },
     ],
   },
 ];
 
 const defaultSocialLinks = [
-  { icon: <FaInstagram className="size-5" />, href: "#", label: "Instagram" },
-  { icon: <FaFacebook className="size-5" />, href: "#", label: "Facebook" },
-  { icon: <FaTwitter className="size-5" />, href: "#", label: "Twitter" },
-  { icon: <FaLinkedin className="size-5" />, href: "#", label: "LinkedIn" },
+  {
+    icon: <FaInstagram className="size-5" />,
+    href: "https://www.instagram.com/",
+    label: "Instagram",
+  },
+  {
+    icon: <FaFacebook className="size-5" />,
+    href: "https://web.facebook.com/imran9066588",
+    label: "Facebook",
+  },
+  {
+    icon: <FaTwitter className="size-5" />,
+    href: "https://web.facebook.com/imran9066588",
+    label: "Twitter",
+  },
+  {
+    icon: <FaLinkedin className="size-5" />,
+    href: "https://www.linkedin.com/in/developerimran1122/",
+    label: "LinkedIn",
+  },
 ];
 
 const defaultLegalLinks = [
-  { name: "Terms and Conditions", href: "#" },
-  { name: "Privacy Policy", href: "#" },
+  { name: "Terms and Conditions", href: "/" },
+  { name: "Privacy Policy", href: "/" },
 ];
 
 const Footer = ({
@@ -87,14 +104,14 @@ const Footer = ({
           <div className="flex w-full flex-col justify-between gap-6 lg:items-start">
             {/* Logo */}
             <div className="flex items-center gap-2 lg:justify-start">
-              <a href={logo.url}>
+              <Link to={logo.url}>
                 <img
                   src={logo.src}
                   alt={logo.alt}
                   title={logo.title}
                   className="h-8"
                 />
-              </a>
+              </Link>
               <h2 className="text-xl font-semibold">{logo.title}</h2>
             </div>
             <p className="text-muted-foreground max-w-[70%] text-sm">
@@ -103,9 +120,9 @@ const Footer = ({
             <ul className="text-muted-foreground flex items-center space-x-6">
               {socialLinks.map((social, idx) => (
                 <li key={idx} className="hover:text-primary font-medium">
-                  <a href={social.href} aria-label={social.label}>
+                  <Link to={social.href} aria-label={social.label}>
                     {social.icon}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -120,7 +137,7 @@ const Footer = ({
                       key={linkIdx}
                       className="hover:text-primary font-medium"
                     >
-                      <a href={link.href}>{link.name}</a>
+                      <Link to={link.href}>{link.name}</Link>
                     </li>
                   ))}
                 </ul>
@@ -133,7 +150,7 @@ const Footer = ({
           <ul className="order-1 flex flex-col gap-2 md:order-2 md:flex-row">
             {legalLinks.map((link, idx) => (
               <li key={idx} className="hover:text-primary">
-                <a href={link.href}> {link.name}</a>
+                <Link to={link.href}> {link.name}</Link>
               </li>
             ))}
           </ul>

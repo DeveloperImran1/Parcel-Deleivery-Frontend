@@ -14,7 +14,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { role } from "@/constant/role";
 import {
   authAPi,
   useLogoutMutation,
@@ -39,7 +38,7 @@ const menuItems = [
   {
     title: "Features",
     url: "/features",
-    role: [role.receiver],
+    role: "PUBLIC",
   },
   {
     title: "About",

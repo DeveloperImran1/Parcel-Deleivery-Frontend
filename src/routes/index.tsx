@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
         path: "faq",
       },
       {
-        Component: withAuth(Features, [role.receiver]),
+        Component: Features,
         path: "features",
       },
       {
