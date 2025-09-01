@@ -34,26 +34,6 @@ interface MenuItem {
   url: string;
 }
 
-interface Navbar1Props {
-  logo?: {
-    url: string;
-    src: string;
-    alt: string;
-    title: string;
-  };
-  menu?: MenuItem[];
-  auth?: {
-    login: {
-      title: string;
-      url: string;
-    };
-    signup: {
-      title: string;
-      url: string;
-    };
-  };
-}
-
 const menuItems = [
   { title: "Home", url: "/", role: "PUBLIC" },
   {

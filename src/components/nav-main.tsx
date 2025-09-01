@@ -1,5 +1,4 @@
-import { type Icon } from "@tabler/icons-react";
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -9,20 +8,12 @@ import {
 } from "@/components/ui/sidebar";
 import { Link } from "react-router";
 
-export function NavMain({
-  items,
-}: {
-  items: {
-    title: string;
-    url: string;
-    icon?: Icon;
-  }[];
-}) {
+export function NavMain({ items }: any) {
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
-          {items.map((item) => (
+          {items.map((item: any) => (
             <SidebarMenuItem key={item.title}>
               <Link to={item.url}>
                 <SidebarMenuButton tooltip={item.title}>

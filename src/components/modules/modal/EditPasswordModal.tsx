@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -20,7 +21,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 
-import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { usePasswordUpdateMutation } from "@/redux/features/user/user.api";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -29,7 +29,6 @@ export function EditPasswordModal() {
   const [open, setOpen] = useState(false);
 
   const [passwordUpdate] = usePasswordUpdateMutation();
-  const { data: user, isLoading } = useUserInfoQuery(undefined);
 
   const form = useForm({
     defaultValues: {
@@ -38,8 +37,7 @@ export function EditPasswordModal() {
     },
   });
 
-  const onSubmit = async (data) => {
-    console.log("data ", data);
+  const onSubmit = async (data: any) => {
     const toastId = toast.loading("Password update is loading");
 
     try {

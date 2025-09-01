@@ -68,7 +68,7 @@ export const router = createBrowserRouter([
     Component: withAuth(DashboardLayout, [role.sender]),
     path: "/sender",
     children: [
-      { index: true, element: <Navigate to="/sender/analytics"></Navigate> },
+      { index: true, element: <Navigate to="/sender/my-profile"></Navigate> },
 
       // aivabe generateRoutes function ke call kore nia aste pari datake.
       ...generateRoutes(senderSidebarItems),
@@ -78,7 +78,7 @@ export const router = createBrowserRouter([
     Component: withAuth(DashboardLayout, [role.receiver]),
     path: "/receiver",
     children: [
-      { index: true, element: <Navigate to="/receiver/analytics"></Navigate> },
+      { index: true, element: <Navigate to="/receiver/my-profile"></Navigate> },
 
       // aivabe generateRoutes function ke call kore nia aste pari datake.
       ...generateRoutes(receiverSidebarItems),

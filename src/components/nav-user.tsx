@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IconDotsVertical, IconLogout } from "@tabler/icons-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -22,7 +23,7 @@ import { useEffect, useId, useState } from "react";
 import { Label } from "./ui/label";
 import { Switch } from "./ui/switch";
 
-export function NavUser({ user, handleLogout }) {
+export function NavUser({ user, handleLogout }: any) {
   const { isMobile } = useSidebar();
   const { setTheme } = useTheme();
 

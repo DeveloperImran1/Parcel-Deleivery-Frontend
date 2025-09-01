@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { DeleteIcon } from "lucide-react";
 
-export function ParcelDeleteModal({ singleParcel }) {
+export function ParcelDeleteModal({ singleParcel }: any) {
   console.log("singleParcel ", singleParcel);
   return (
     <AlertDialog>

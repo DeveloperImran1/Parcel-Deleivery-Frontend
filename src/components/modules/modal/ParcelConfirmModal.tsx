@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,7 +15,7 @@ import { useEditParcelMutation } from "@/redux/features/parcel/parcel.api";
 import { BookCheck } from "lucide-react";
 import { toast } from "sonner";
 
-export function ParcelConfirmModal({ singleParcel }) {
+export function ParcelConfirmModal({ singleParcel }: any) {
   const [editParcel] = useEditParcelMutation();
 
   const handleConfirm = async () => {

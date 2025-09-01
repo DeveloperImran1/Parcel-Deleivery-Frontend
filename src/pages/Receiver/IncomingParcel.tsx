@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ParcelConfirmModal } from "@/components/modules/modal/ParcelConfirmModal";
 import Loader from "@/components/modules/shared/Loading";
 import CommonPagination from "@/components/pagignation";
@@ -16,7 +17,7 @@ import { useEffect, useState } from "react";
 
 const IncomingParcel = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const [limit, setLimit] = useState(5);
+  const [limit] = useState(5);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -60,7 +61,7 @@ const IncomingParcel = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {parcel?.data?.map((singleParcel) => (
+            {parcel?.data?.map((singleParcel: any) => (
               <TableRow key={singleParcel?._id}>
                 <TableCell>{singleParcel?.trackingId}</TableCell>
                 <TableCell>{singleParcel.type}</TableCell>

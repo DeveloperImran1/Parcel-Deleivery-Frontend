@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Loader from "@/components/modules/shared/Loading";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useGetAdminStatsQuery } from "@/redux/features/user/user.api";
@@ -116,7 +117,7 @@ const Analytics = () => {
           </CardHeader>
           <CardContent>
             <div className="flex justify-center items-center flex-wrap gap-6">
-              {stats.usersByRole.map((role) => (
+              {stats.usersByRole.map((role: any) => (
                 <div
                   key={role._id}
                   className="p-4 bg-gray-100 rounded-xl flex flex-col items-center shadow"

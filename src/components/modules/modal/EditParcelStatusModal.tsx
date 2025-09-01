@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -25,9 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { useEditParcelMutation } from "@/redux/features/parcel/parcel.api";
-import { useGetAllReceiverQuery } from "@/redux/features/user/user.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Edit } from "lucide-react";
 import { useState } from "react";
@@ -39,14 +38,12 @@ const parcelSchema = z.object({
   status: z.string().min(1, "Select any status"),
 });
 
-export function EditParcelStatusModal({ singleParcel }) {
+export function EditParcelStatusModal({ singleParcel }: any) {
   const [open, setOpen] = useState(false);
 
   console.log("singleParcel ", singleParcel);
-  const { data: user, isLoading } = useUserInfoQuery(undefined);
 
   const [editParcel] = useEditParcelMutation();
-  const { data: receiver } = useGetAllReceiverQuery(undefined);
 
   const form = useForm<z.infer<typeof parcelSchema>>({
     resolver: zodResolver(parcelSchema),
@@ -55,7 +52,7 @@ export function EditParcelStatusModal({ singleParcel }) {
     },
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     console.log("Parcel status submitted:", data);
     const toastId = toast.loading("Parcel status updating...");
     const parcelId = singleParcel?.trackingId;

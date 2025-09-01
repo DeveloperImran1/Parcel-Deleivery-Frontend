@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -21,7 +22,6 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 
 import SingleImageUploader from "@/components/SingleImageUploader";
-import { useFileUpload } from "@/hooks/use-file-upload";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { useProfileUpdateMutation } from "@/redux/features/user/user.api";
 import { useState } from "react";
@@ -33,14 +33,10 @@ export function ProfileUpdateModal() {
 
   const [profileUpdate] = useProfileUpdateMutation();
 
-  const { data: user, isLoading } = useUserInfoQuery(undefined);
-  const [{ files }, { removeFile, openFileDialog, getInputProps }] =
-    useFileUpload({
-      accept: "image/*",
-    });
-
-  const previewUrl = files[0]?.preview || null;
-  const fileName = files[0]?.file.name || null;
+  const { data: user } = useUserInfoQuery(undefined);
+  // const [{ files }] = useFileUpload({
+  //   accept: "image/*",
+  // });
 
   const form = useForm({
     defaultValues: {
@@ -51,7 +47,7 @@ export function ProfileUpdateModal() {
 
   const id = user?.data?._id;
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     const toastId = toast.loading("Profile update is loading");
     const formData = new FormData();
 

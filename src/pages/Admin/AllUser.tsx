@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Loader from "@/components/modules/shared/Loading";
 import CommonPagination from "@/components/pagignation";
 import { Button } from "@/components/ui/button";
@@ -20,7 +21,7 @@ import { toast } from "sonner";
 
 const AllUser = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const [limit, setLimit] = useState(5);
+  const [limit] = useState(5);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -41,7 +42,7 @@ const AllUser = () => {
   const { data, isLoading } = useGetAllUserQuery({ page: currentPage, limit });
   const [profileUpdate] = useProfileUpdateMutation();
 
-  const handleUpdateStatus = async (id, data) => {
+  const handleUpdateStatus = async (id: string, data: boolean) => {
     const status = { isBlocked: data };
     const toastId = toast.loading("Profile update is loading");
     const formData = new FormData();
@@ -80,7 +81,7 @@ const AllUser = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users?.map((user) => (
+            {users?.map((user: any) => (
               <TableRow key={user?._id}>
                 <TableCell>
                   <img

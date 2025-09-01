@@ -1,24 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { EditParcelModal } from "@/components/modules/modal/EditParcelModal";
 import { ParcelDeleteModal } from "@/components/modules/modal/ParcelDeleteModal";
 import Loader from "@/components/modules/shared/Loading";
 import CommonPagination from "@/components/pagignation";
 import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table";
 import { useGetMyParcelQuery } from "@/redux/features/parcel/parcel.api";
 import { useEffect, useState } from "react";
 
-
 const MyParcel = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const [limit, setLimit] = useState(5);
+  const [limit] = useState(5);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -62,7 +62,7 @@ const MyParcel = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {parcel?.data?.map((singleParcel) => (
+            {parcel?.data?.map((singleParcel: any) => (
               <TableRow key={singleParcel?._id}>
                 <TableCell>{singleParcel?.trackingId}</TableCell>
                 <TableCell>{singleParcel.type}</TableCell>

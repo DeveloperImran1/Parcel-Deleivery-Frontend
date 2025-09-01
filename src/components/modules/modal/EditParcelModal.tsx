@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -45,10 +46,10 @@ const parcelSchema = z.object({
   couponCode: z.string().optional(),
 });
 
-export function EditParcelModal({ singleParcel }) {
+export function EditParcelModal({ singleParcel }: any) {
   const [open, setOpen] = useState(false);
 
-  const { data: user, isLoading } = useUserInfoQuery(undefined);
+  const { data: user } = useUserInfoQuery(undefined);
 
   const [editParcel] = useEditParcelMutation();
   const { data: receiver } = useGetAllReceiverQuery(undefined);
@@ -68,7 +69,7 @@ export function EditParcelModal({ singleParcel }) {
   const allReceiver = receiver?.data?.data;
   console.log("receiver", allReceiver);
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     data.sender = user?.data?._id;
 
     console.log("Parcel form submitted:", data);
@@ -204,7 +205,7 @@ export function EditParcelModal({ singleParcel }) {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            {allReceiver?.map((receiver) => (
+                            {allReceiver?.map((receiver: any) => (
                               <SelectItem value={receiver?._id}>
                                 {receiver?.name}
                               </SelectItem>

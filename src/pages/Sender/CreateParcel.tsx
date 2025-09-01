@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -37,7 +38,7 @@ const parcelSchema = z.object({
 // ----------------- Component -----------------
 const CreateParcel = () => {
   const [createParcel] = useCreateParcelMutation();
-  const { data: user, isLoading } = useUserInfoQuery(undefined);
+  const { data: user } = useUserInfoQuery(undefined);
   const { data: receiver } = useGetAllReceiverQuery(undefined);
 
   const form = useForm<z.infer<typeof parcelSchema>>({
@@ -55,7 +56,7 @@ const CreateParcel = () => {
   const allReceiver = receiver?.data?.data;
   console.log("receiver", allReceiver);
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     data.sender = user?.data?._id;
 
     console.log("Parcel form submitted:", data);
@@ -173,7 +174,7 @@ const CreateParcel = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {allReceiver?.map((receiver) => (
+                      {allReceiver?.map((receiver: any) => (
                         <SelectItem value={receiver?._id}>
                           {receiver?.name}
                         </SelectItem>
