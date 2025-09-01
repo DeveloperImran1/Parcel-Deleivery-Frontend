@@ -1,9 +1,13 @@
+import AllParcel from "@/pages/Admin/AllParcel";
+import AllUser from "@/pages/Admin/AllUser";
 import Analytics from "@/pages/Admin/Analytics";
+import Profile from "@/pages/Profile";
 import {
   IconDashboard,
   IconFolder,
   IconListDetails,
 } from "@tabler/icons-react";
+import { User } from "lucide-react";
 
 export const adminSidebarItems = [
   {
@@ -12,17 +16,23 @@ export const adminSidebarItems = [
     component: Analytics,
     icon: IconDashboard,
   },
+  {
+    title: "Profile",
+    url: "/admin/my-profile",
+    component: Profile,
+    icon: User,
+  },
 
   {
-    title: "Lifecycle",
-    url: "/admin//lifesicle",
+    title: "All User",
+    url: "/admin/all-user",
     icon: IconListDetails,
-    component: Analytics,
+    component: AllUser,
   },
   {
-    title: "Projects",
-    url: "/admin/projects",
+    title: "All Parcel",
+    url: "/admin/all-parcel",
     icon: IconFolder,
-    component: Analytics,
+    component: AllParcel,
   },
 ];

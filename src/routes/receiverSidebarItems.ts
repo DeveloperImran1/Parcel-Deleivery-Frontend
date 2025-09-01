@@ -1,29 +1,26 @@
-import Analytics from "@/pages/Admin/Analytics";
-import {
-  IconDashboard,
-  IconFolder,
-  IconListDetails,
-} from "@tabler/icons-react";
+import Profile from "@/pages/Profile";
+import ConfirmedParcel from "@/pages/Receiver/ConfirmedParcel";
+import IncomingParcel from "@/pages/Receiver/IncomingParcel";
+import { IconListDetails } from "@tabler/icons-react";
+import { User } from "lucide-react";
 
 export const receiverSidebarItems = [
   {
-    title: "Analytics",
-    url: "/receiver/analytics",
-    component: Analytics,
-    icon: IconDashboard,
+    title: "Profile",
+    url: "/receiver/my-profile",
+    component: Profile,
+    icon: User,
   },
-
   {
-    title: "Lifecycle",
-    url: "/receiver/lifesicle",
+    title: "Incoming Parcel",
+    url: "/receiver/incoming-parcel",
     icon: IconListDetails,
-    component: Analytics,
+    component: IncomingParcel,
   },
-
   {
-    title: "Projects",
-    url: "/receiver/project",
-    icon: IconFolder,
-    component: Analytics,
+    title: "Deleiverd Parcel",
+    url: "/receiver/deleiverd-parcel",
+    icon: IconListDetails,
+    component: ConfirmedParcel,
   },
 ];

@@ -1,17 +1,25 @@
-import Analytics from "@/pages/Admin/Analytics";
-import { IconDashboard, IconListDetails } from "@tabler/icons-react";
+import Profile from "@/pages/Profile";
+import CreateParcel from "@/pages/Sender/CreateParcel";
+import MyParcel from "@/pages/Sender/MyParcel";
+import { IconListDetails } from "@tabler/icons-react";
+import { User } from "lucide-react";
 export const senderSidebarItems = [
   {
-    title: "Analytics",
-    url: "/sender/analytics",
-    component: Analytics,
-    icon: IconDashboard,
+    title: "Profile",
+    url: "/sender/my-profile",
+    component: Profile,
+    icon: User,
   },
-
   {
-    title: "Lifecycle",
-    url: "/sender/lifesicle",
+    title: "Create Parcel",
+    url: "/sender/create-parcel",
     icon: IconListDetails,
-    component: Analytics,
+    component: CreateParcel,
+  },
+  {
+    title: "My Parcel",
+    url: "/sender/my-parcel",
+    icon: IconListDetails,
+    component: MyParcel,
   },
 ];

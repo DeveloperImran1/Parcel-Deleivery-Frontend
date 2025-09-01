@@ -12,75 +12,63 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { role } from "@/constant/role";
-import { useRegisterMutation } from "@/redux/features/auth/auth.api";
+import { useLoginMutation } from "@/redux/features/auth/auth.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router";
 import { toast } from "sonner";
 import { z } from "zod";
-const registerSchema = z.object({
-  name: z
-    .string({ message: "Name must be a string" })
-    .min(5, { message: "Name length must be at least 5 characters" })
-    .max(100, { message: "Name length must not exceed 100 characters" }),
-
+const loginSchema = z.object({
   email: z
     .string({ message: "Email must be a string" })
-    .email({ message: "Invalid email address format" })
-    .min(5, { message: "Email length must be at least 5 characters" })
-    .max(100, { message: "Email length must not exceed 100 characters" }),
+    .email({ message: "Invalid email address format" }),
 
-  password: z
-    .string({ message: "Password must be a string" })
-    .min(8, { message: "Password must be at least 8 characters long" }),
-
-  role: z.enum(Object.values(role) as [string], {
-    message: "Role must be Sender or Receiver",
-  }),
+  password: z.string({ message: "Password must be a string" }),
 });
 
-export function RegisterForm({
+export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const [register] = useRegisterMutation();
+  const [login] = useLoginMutation();
   const navigate = useNavigate();
 
-  const form = useForm<z.infer<typeof registerSchema>>({
-    resolver: zodResolver(registerSchema),
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-      role: "",
+      email: "ih9066588@gmail.com",
+      password: "ih9066588@gmail.com",
     },
   });
-  async function onSubmit(data: z.infer<typeof registerSchema>) {
-    const toastId = toast.loading("Creating user....");
+  async function onSubmit(data: z.infer<typeof loginSchema>) {
+    const toastId = toast.loading("Login is loading....");
     try {
-      const res = await register(data).unwrap();
-      if (res?.success && res?.data?.user?.email) {
+      const res = await login(data).unwrap();
+      console.log("res is", res);
+      if (res?.success && res?.data?.accessToken) {
+        toast.success("Loged in successfully", { id: toastId });
+
         const user = {
           name: res?.data?.user?.name,
           email: res?.data?.user?.email,
           role: res?.data?.user?.role,
         };
         localStorage.setItem("user", JSON.stringify(user));
-        toast.success("User created successfully", { id: toastId });
-        navigate("/verify", { state: data.email });
+
+        navigate("/");
       }
-      console.log("res is", res);
     } catch (error) {
-      console.log("registration error ", error);
-      toast.error("Register error", { id: toastId });
+      console.log("Login error ", error);
+
+      if (
+        error.status === 502 &&
+        error?.data?.message === "User is not verified"
+      ) {
+        toast.error("Your account is not verified", { id: toastId });
+        navigate("/verify", { state: data.email });
+      } else {
+        toast.error("Login error", { id: toastId });
+      }
     }
   }
 
@@ -95,20 +83,7 @@ export function RegisterForm({
                   <h1 className="text-2xl font-bold">Welcome back</h1>
                   <Logo></Logo>
                 </div>
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Full Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your Name" {...field} />
-                      </FormControl>
 
-                      <FormMessage className="text-left" />
-                    </FormItem>
-                  )}
-                />
                 <FormField
                   control={form.control}
                   name="email"
@@ -137,32 +112,8 @@ export function RegisterForm({
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="role"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Role</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl className="w-full border-2">
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select your role" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="SENDER">Sender</SelectItem>
-                          <SelectItem value="RECEIVER">Receiver</SelectItem>
-                        </SelectContent>
-                      </Select>
 
-                      <FormMessage className="text-left" />
-                    </FormItem>
-                  )}
-                />
-                <Button type="submit">Register</Button>
+                <Button type="submit">Login</Button>
 
                 {/* <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                   <span className="bg-card text-muted-foreground relative z-10 px-2">
@@ -181,9 +132,12 @@ export function RegisterForm({
                   </Button>
                 </div> */}
                 <div className="text-center text-sm">
-                  Already have an account?{" "}
-                  <NavLink to="/login" className="underline underline-offset-4">
-                    Login
+                  Don&apos;t have an account?{" "}
+                  <NavLink
+                    to="/register"
+                    className="underline underline-offset-4"
+                  >
+                    Register
                   </NavLink>
                 </div>
               </div>

@@ -1,20 +1,22 @@
-import { ParcelConfirmModal } from "@/components/modules/modal/ParcelConfirmModal";
+import { EditParcelModal } from "@/components/modules/modal/EditParcelModal";
+import { ParcelDeleteModal } from "@/components/modules/modal/ParcelDeleteModal";
 import Loader from "@/components/modules/shared/Loading";
 import CommonPagination from "@/components/pagignation";
 import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableFooter,
+    TableHead,
+    TableHeader,
+    TableRow,
 } from "@/components/ui/table";
 import { useGetMyParcelQuery } from "@/redux/features/parcel/parcel.api";
 import { useEffect, useState } from "react";
 
-const IncomingParcel = () => {
+
+const MyParcel = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [limit, setLimit] = useState(5);
 
@@ -71,9 +73,12 @@ const IncomingParcel = () => {
                 <TableCell>{singleParcel.pickupAddress}</TableCell>
                 <TableCell>{singleParcel.status}</TableCell>
                 <TableCell className="flex gap-2">
-                  <ParcelConfirmModal
+                  <ParcelDeleteModal
                     singleParcel={singleParcel}
-                  ></ParcelConfirmModal>{" "}
+                  ></ParcelDeleteModal>{" "}
+                  <EditParcelModal
+                    singleParcel={singleParcel}
+                  ></EditParcelModal>
                 </TableCell>
               </TableRow>
             ))}
@@ -95,4 +100,4 @@ const IncomingParcel = () => {
   );
 };
 
-export default IncomingParcel;
+export default MyParcel;

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 
-const Logo = () => {
+const LogoWithoutName = () => {
   return (
     <div>
       <NavLink to="/" className="flex items-center gap-2">
@@ -9,10 +9,9 @@ const Logo = () => {
           className="max-h-8 dark:invert"
           alt="Logo"
         />
-        <span className="text-lg font-semibold tracking-tighter">Pathao</span>
       </NavLink>
     </div>
   );
 };
 
-export default Logo;
+export default LogoWithoutName;

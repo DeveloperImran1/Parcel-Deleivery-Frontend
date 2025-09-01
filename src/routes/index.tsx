@@ -10,7 +10,6 @@ import Faq from "@/pages/Public/Faq";
 import Features from "@/pages/Public/Features";
 import HomePage from "@/pages/Public/HomePage";
 import UnAuthorized from "@/pages/Public/Unauthorized";
-import type { TRole } from "@/types/auth.type";
 import { generateRoutes } from "@/utils/generateRoutes";
 import withAuth from "@/utils/withAuth";
 import { createBrowserRouter, Navigate } from "react-router";
@@ -41,7 +40,7 @@ export const router = createBrowserRouter([
         path: "faq",
       },
       {
-        Component: Features,
+        Component: withAuth(Features, [role.receiver]),
         path: "features",
       },
       {
@@ -56,7 +55,7 @@ export const router = createBrowserRouter([
   },
 
   {
-    Component: withAuth(DashboardLayout, role.admin as TRole),
+    Component: withAuth(DashboardLayout, [role.admin]),
     path: "/admin",
     children: [
       { index: true, element: <Navigate to="/admin/analytics"></Navigate> },
@@ -66,7 +65,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    Component: withAuth(DashboardLayout, role.sender as TRole),
+    Component: withAuth(DashboardLayout, [role.sender]),
     path: "/sender",
     children: [
       { index: true, element: <Navigate to="/sender/analytics"></Navigate> },
@@ -76,7 +75,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    Component: withAuth(DashboardLayout, role.receiver as TRole),
+    Component: withAuth(DashboardLayout, [role.receiver]),
     path: "/receiver",
     children: [
       { index: true, element: <Navigate to="/receiver/analytics"></Navigate> },

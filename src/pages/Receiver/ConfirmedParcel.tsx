@@ -1,4 +1,3 @@
-import { ParcelConfirmModal } from "@/components/modules/modal/ParcelConfirmModal";
 import Loader from "@/components/modules/shared/Loading";
 import CommonPagination from "@/components/pagignation";
 import {
@@ -14,7 +13,7 @@ import {
 import { useGetMyParcelQuery } from "@/redux/features/parcel/parcel.api";
 import { useEffect, useState } from "react";
 
-const IncomingParcel = () => {
+const ConfirmedParcel = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [limit, setLimit] = useState(5);
 
@@ -34,7 +33,11 @@ const IncomingParcel = () => {
     };
   }, []);
 
-  const { data, isLoading } = useGetMyParcelQuery({ page: currentPage, limit });
+  const { data, isLoading } = useGetMyParcelQuery({
+    page: currentPage,
+    limit,
+    status: "Delivered",
+  });
   const parcel = data?.data;
   console.log(parcel);
 
@@ -56,7 +59,6 @@ const IncomingParcel = () => {
               <TableHead className="">Delivery Address</TableHead>
               <TableHead className="">Pickup Address</TableHead>
               <TableHead className="">Status</TableHead>
-              <TableHead className="">Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -70,11 +72,6 @@ const IncomingParcel = () => {
                 <TableCell>{singleParcel.deliveryAddress}</TableCell>
                 <TableCell>{singleParcel.pickupAddress}</TableCell>
                 <TableCell>{singleParcel.status}</TableCell>
-                <TableCell className="flex gap-2">
-                  <ParcelConfirmModal
-                    singleParcel={singleParcel}
-                  ></ParcelConfirmModal>{" "}
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -95,4 +92,4 @@ const IncomingParcel = () => {
   );
 };
 
-export default IncomingParcel;
+export default ConfirmedParcel;

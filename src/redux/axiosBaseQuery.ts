@@ -23,6 +23,7 @@ const axiosBaseQuery =
         params,
         headers,
       });
+      console.log("axios base query theke data", result);
       return { data: result.data };
     } catch (axiosError) {
       const err = axiosError as AxiosError;

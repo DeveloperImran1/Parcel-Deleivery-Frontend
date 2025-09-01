@@ -1,4 +1,4 @@
-import { ParcelConfirmModal } from "@/components/modules/modal/ParcelConfirmModal";
+import { EditParcelStatusModal } from "@/components/modules/modal/EditParcelStatusModal";
 import Loader from "@/components/modules/shared/Loading";
 import CommonPagination from "@/components/pagignation";
 import {
@@ -11,10 +11,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useGetMyParcelQuery } from "@/redux/features/parcel/parcel.api";
+import { useGetAllParcelQuery } from "@/redux/features/parcel/parcel.api";
 import { useEffect, useState } from "react";
 
-const IncomingParcel = () => {
+const AllParcel = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [limit, setLimit] = useState(5);
 
@@ -34,7 +34,10 @@ const IncomingParcel = () => {
     };
   }, []);
 
-  const { data, isLoading } = useGetMyParcelQuery({ page: currentPage, limit });
+  const { data, isLoading } = useGetAllParcelQuery({
+    page: currentPage,
+    limit,
+  });
   const parcel = data?.data;
   console.log(parcel);
 
@@ -71,9 +74,9 @@ const IncomingParcel = () => {
                 <TableCell>{singleParcel.pickupAddress}</TableCell>
                 <TableCell>{singleParcel.status}</TableCell>
                 <TableCell className="flex gap-2">
-                  <ParcelConfirmModal
+                  <EditParcelStatusModal
                     singleParcel={singleParcel}
-                  ></ParcelConfirmModal>{" "}
+                  ></EditParcelStatusModal>
                 </TableCell>
               </TableRow>
             ))}
@@ -95,4 +98,4 @@ const IncomingParcel = () => {
   );
 };
 
-export default IncomingParcel;
+export default AllParcel;
